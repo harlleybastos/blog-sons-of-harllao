@@ -17,11 +17,11 @@ export default function Home({ posts }) {
             <PostCard post={post.node} key={post.node.author.id} />
           ))}
         </div>
-      </div>
-      <div className="col-span-1 lg:col-span-4">
-        <div className="relative lg:sticky top-8">
-          <PostWidget />
-          <Categories />
+        <div className="col-span-1 lg:col-span-4">
+          <div className="relative lg:sticky top-8">
+            <PostWidget />
+            <Categories />
+          </div>
         </div>
       </div>
     </div>

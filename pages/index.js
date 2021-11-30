@@ -2,14 +2,9 @@ import Head from "next/head";
 import Categories from "../components/Categories";
 import PostCard from "../components/PostCard";
 import PostWidget from "../components/PostWidget";
-import { getPosts } from '../services';
+import { getPosts } from "../services";
 
-
-export default function Home({
-  posts
-}) {
-  console.log(posts)
-
+export default function Home({ posts }) {
   return (
     <div className="container px-10 mx-auto mb-8">
       <Head>
@@ -18,8 +13,8 @@ export default function Home({
       </Head>
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
         <div className="col-span-1 lg:col-span-8">
-          {posts || []?.map((post, index) => (
-            <PostCard post={post} key={post.title} />
+          {posts.map((post, index) => (
+            <PostCard post={post.node} key={post.node.author.id} />
           ))}
         </div>
       </div>
@@ -33,11 +28,10 @@ export default function Home({
   );
 }
 
+export const getStaticProps = async () => {
+  const posts = (await getPosts()) || [];
 
-export async function getStaticPosts() {
-  const posts = await getPosts()
-  console.log(posts);
   return {
-    props: { posts }
-  }
-}
+    props: { posts },
+  };
+};

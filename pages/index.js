@@ -5,6 +5,7 @@ import PostWidget from "../components/PostWidget";
 import { getPosts } from "../services";
 
 export default function Home({ posts }) {
+  console.log(posts)
   return (
     <div className="container px-10 mx-auto mb-8">
       <Head>
@@ -28,10 +29,9 @@ export default function Home({ posts }) {
   );
 }
 
-export const getStaticProps = async () => {
-  const posts = (await getPosts()) || [];
-
+export async function getStaticProps() {
+  const posts = await getPosts();
   return {
     props: { posts },
   };
-};
+}

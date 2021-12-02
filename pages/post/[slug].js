@@ -9,11 +9,6 @@ import Comments from "../../components/Comments";
 import Author from "../../components/Author";
 
 const PostDetails = ({ post }) => {
-
-  useEffect(()=>{
-
-    console.log(post)
-  },[post])
   return (
     <div className="container px-10 mx-auto mb-8 ">
       <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">

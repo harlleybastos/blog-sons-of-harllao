@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 
 import Link from "next/link";
+import Logo from "../../assets/img/LOGO-PURA.png";
 import { getCategories } from "../../services";
+import Image from "next/image";
 
 const Header = () => {
   const [categories, setCategories] = useState([]);
@@ -13,8 +15,15 @@ const Header = () => {
     <div className="container px-10 mx-auto mb-8">
       <div className="inline-block w-full py-8 border-b border-blue-400">
         <div className="block md:float-left">
+          {/* <Image
+            src={Logo}
+            unoptimized
+            width="150"
+            height="150"
+            alt="Sons of Harllão Logo"
+          /> */}
           <Link href="/">
-            <span className="text-4xl font-bold text-white cursor-pointer">
+            <span className="text-4xl font-bold text-white cursor-pointer text-title">
               Sons of Harllão
             </span>
           </Link>

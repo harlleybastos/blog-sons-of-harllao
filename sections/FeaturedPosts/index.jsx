@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import FeaturedPostCard from "../../components/FeaturedPostCard";
@@ -39,7 +41,7 @@ const FeaturedPosts = () => {
     <div className="absolute left-0 py-3 text-center bg-pink-600 rounded-full cursor-pointer arrow-btn">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="w-6 w-full h-6 text-white"
+        className="w-6 h-6 text-white"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -58,7 +60,7 @@ const FeaturedPosts = () => {
     <div className="absolute right-0 py-3 text-center bg-pink-600 rounded-full cursor-pointer arrow-btn">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="w-6 w-full h-6 text-white"
+        className="w-6 h-6 text-white"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -75,18 +77,32 @@ const FeaturedPosts = () => {
 
   return (
     <div className="mb-8">
-      <Carousel
-        infinite
-        customLeftArrow={customLeftArrow}
-        customRightArrow={customRightArrow}
-        responsive={responsive}
-        itemClass="px-4"
-      >
-        {dataLoaded &&
-          featuredPosts.map((post, index) => (
+      {!dataLoaded ? (
+        <SkeletonTheme
+          baseColor="#202020"
+          highlightColor="#444"
+          height={288}
+          borderRadius={20}
+          inline
+        >
+          <Skeleton width={259} style={{ marginRight: 20 }} />
+          <Skeleton width={259} style={{ marginRight: 20 }} />
+          <Skeleton width={259} style={{ marginRight: 20 }} />
+          <Skeleton width={259} style={{ marginRight: 20 }} />
+        </SkeletonTheme>
+      ) : (
+        <Carousel
+          infinite
+          customLeftArrow={customLeftArrow}
+          customRightArrow={customRightArrow}
+          responsive={responsive}
+          itemClass="px-4"
+        >
+          {featuredPosts.map((post, index) => (
             <FeaturedPostCard key={index} post={post} />
           ))}
-      </Carousel>
+        </Carousel>
+      )}
     </div>
   );
 };

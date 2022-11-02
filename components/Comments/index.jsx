@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { getComments } from "../../services";
 import moment from "moment";
 import parse from "html-react-parser";
+import { StarRating } from "../StarsRatting";
 
 const Comments = ({ slug }) => {
   const [comments, setComments] = useState([]);
@@ -25,9 +26,14 @@ const Comments = ({ slug }) => {
                 <span className="font-semibold">{comment.name}</span> on{" "}
                 {moment(comment.createdAt).format("MMM DD, YYYY")}
               </p>
-              <p className="w-full text-gray-600 whitespace-pre-line">
-                {parse(comment.comment)}
-              </p>
+              <div className="flex">
+                <p className="w-full text-gray-600 whitespace-pre-line">
+                  {parse(comment.comment)}
+                </p>
+                {comment.userHasRated && (
+                  <StarRating numberOfStars={comment.numberOfStars} />
+                )}
+              </div>
             </div>
           ))}
         </div>

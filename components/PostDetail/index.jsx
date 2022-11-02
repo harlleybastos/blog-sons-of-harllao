@@ -53,7 +53,7 @@ const PostDetail = ({ post }) => {
       </div>
       <div className="px-4 lg:px-0">
         <div className="flex items-center w-full mb-8">
-          <div className="flex items-center w-full mb-4 mr-8 lg:mb:0 lg:w-auto">
+          <div className="flex items-center w-full mb-4 mr-8 lg:mb-0 lg:w-auto">
             <img
               src={post.author.photo?.url}
               alt={post.author.name}

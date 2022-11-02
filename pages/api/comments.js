@@ -1,7 +1,6 @@
 import { GraphQLClient, gql } from "graphql-request";
 
 const graphlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
-const graphcmsToken = process.env.GRAPHCMS_TOKEN
 export default async function comments(req, res) {
   const graphQLClient = new GraphQLClient(graphlAPI, {
     headers: {
@@ -14,6 +13,8 @@ export default async function comments(req, res) {
       $name: String!
       $email: String!
       $comment: String!
+      $numberOfStars: Int!
+      $userHasRated: Boolean!
       $slug: String!
     ) {
       createComment(
@@ -21,6 +22,8 @@ export default async function comments(req, res) {
           name: $name
           email: $email
           comment: $comment
+          numberOfStars: $numberOfStars
+          userHasRated: $userHasRated
           post: { connect: { slug: $slug } }
         }
       ) {

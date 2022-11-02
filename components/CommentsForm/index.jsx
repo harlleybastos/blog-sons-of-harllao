@@ -1,20 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import { submitComment } from "../../services";
+import { StarRating } from "../StarsRatting";
 
 const CommentsForm = ({ slug }) => {
   const [error, setError] = useState(false);
-  const [localStorage, setLocalStorage] = useState(null);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [userWantsRatting, setUserWantsRatting] = useState(false);
+  const [numberOfStars, setNumberOfStars] = useState(null);
   const commentEl = useRef();
   const nameEl = useRef();
-  const emailEl = useRef();
+  const emailEl = useRef(); 
   const storeDataEl = useRef();
-
+  const ratingEl = useRef();
 
   useEffect(() => {
-    nameEl.current.value = window.localStorage.getItem('name');
-    emailEl.current.value = window.localStorage.getItem('email');
-  }, [])
+    nameEl.current.value = window.localStorage.getItem("name");
+    emailEl.current.value = window.localStorage.getItem("email");
+  }, []);
 
   const handleCommentSubmission = () => {
     setError(false);
@@ -34,6 +36,8 @@ const CommentsForm = ({ slug }) => {
       email,
       comment,
       slug,
+      userHasRated: userWantsRatting,
+      numberOfStars: numberOfStars,
     };
 
     if (storeData) {
@@ -54,7 +58,9 @@ const CommentsForm = ({ slug }) => {
 
   return (
     <div className="p-8 pb-12 mb-8 bg-white rounded-lg shadow-lg">
-      <h3 className="pb-4 mb-8 text-xl font-semibold border-b">Leave a Reply</h3>
+      <h3 className="pb-4 mb-8 text-xl font-semibold border-b">
+        Leave a Reply
+      </h3>
       <div className="grid grid-cols-1 gap-4 mb-4 ">
         <textarea
           ref={commentEl}
@@ -79,7 +85,7 @@ const CommentsForm = ({ slug }) => {
           name="email"
         />
       </div>
-      <div className="grid grid-cols-1 gap-4 mb-4 ">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-4 ">
         <div>
           <input
             type="checkbox"
@@ -92,10 +98,30 @@ const CommentsForm = ({ slug }) => {
             htmlFor="storeData"
             className="ml-2 text-gray-500 cursor-pointer"
           >
-            Save my e-mail and name for next time I comment.
+            Salvar meu e-mail e nome para a próxima vez que eu comentar
           </label>
         </div>
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            ref={ratingEl}
+            id="rattingData"
+            name="rattingData"
+            value={userWantsRatting}
+            onChange={(event) => setUserWantsRatting(event.target.checked)}
+          />
+          <label
+            htmlFor="rattingData"
+            className="ml-2 text-gray-500 cursor-pointer"
+          >
+            Eu gostaria de avaliar
+          </label>
+          {ratingEl.current?.checked === true && (
+            <StarRating setNumberOfStars={setNumberOfStars} />
+          )}
+        </div>
       </div>
+
       {error && <p className="text-xs text-red-500">All fields are required</p>}
       <div className="mt-8">
         <button

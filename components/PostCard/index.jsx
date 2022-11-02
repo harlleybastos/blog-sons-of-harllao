@@ -16,7 +16,7 @@ function PostCard({ post }) {
         <Link href={`/post/${post.slug}`}>{post.title}</Link>
       </h1>
       <div className="items-center justify-center block w-full mb-8 text-center lg:flex">
-        <div className="flex items-center justify-center w-full mb-4 mr-8 lg:mb:0 lg:w-auto">
+        <div className="flex items-center justify-center w-full mb-4 mr-8 lg:mb-0 lg:w-auto">
           <img
             src={post.author.photo?.url}
             alt={post.author.name}
@@ -51,7 +51,7 @@ function PostCard({ post }) {
       <p className="px-4 mb-8 text-lg font-normal text-center text-gray-700 lg:px-20">{post.excerpt}</p>
       <div className="text-center">
         <Link href={`/post/${post.slug}`}>
-          <span className="inline-block px-8 py-3 text-lg font-medium text-white transition duration-500 transform bg-pink-600 rounded-full cursor-pointer hover:-translate-y-1">Continue reading</span>
+          <span className="inline-block px-8 py-3 text-lg font-medium text-white transition duration-500 transform bg-pink-600 rounded-full cursor-pointer hover:-translate-y-1">Continuar lendo</span>
         </Link>
       </div>
     </div>
